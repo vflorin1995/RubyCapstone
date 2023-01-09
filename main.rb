@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Main Class
 class Main
   def start
