@@ -2,6 +2,8 @@
 
 require_relative 'book'
 require_relative 'label'
+require_relative 'genre'
+require_relative 'music_album'
 
 class App
   def initialize
@@ -53,7 +55,7 @@ class App
     date = gets.chomp
     book = Book.new(publisher, cover, date)
     @books.push(book)
-    puts "\nWould you like to add a label?\n"
+    puts "\nWould you like to add a label?(1)\n"
     option = gets.chomp.to_i
     if option == 1
       puts "\nChoose a title for the label\n"
@@ -86,14 +88,13 @@ class App
 
   # Add Music Album
   def add_a_music_album
-    puts "\nGenre\n"
-    genre = gets.chomp
-    puts "\nAuthor\n"
-    author = gets.chomp
-    puts "\nPublish date\n"
-    date = gets.chomp
-    album = MusicAlbum.new(genre, author, date)
-    @albums.push(album)
+    puts "Is the album on Spotify? [y/n]"
+    input = gets.chomp.downcase
+    on_sportify = input == 'y'
+    puts "Publish date:"
+    publish_date = gets.chomp.to_s
+    album = MusicAlbum.new(on_sportify, publish_date)
+    @albums << album
     puts "\nWould you like to add a label?\n"
     option = gets.chomp.to_i
     if option == 1
@@ -104,6 +105,8 @@ class App
       label = Label.new(label_title, label_color)
       @labels.push(label)
     end
+    puts "Music album added successfully"
+    puts " "
     menu
   end
 
@@ -111,9 +114,11 @@ class App
   def list_all_music_albums
     if @albums.empty?
       puts "\nThere are no music album available\n"
+      puts ''
     else
-      @albums.each { |album| puts "Genre: #{album.genre}, Author: #{album.author}" }
+      @albums.each { |album| puts "on Sportify?: #{album.on_sportify}, Publish date: #{album.publish_date}" }
     end
+    puts ' '
     menu
   end
 
@@ -121,6 +126,7 @@ class App
   def list_all_genres
     if @genres.empty?
       puts "\nThere are no genre available"
+         puts ''
     else
       @genres.each { |genre| puts "Name: #{genre.name}" }
     end
