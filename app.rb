@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'book'
 require_relative 'label'
 
@@ -29,12 +31,16 @@ class App
     case action
     when 1
       list_all_books
-
+    when 2
+      list_all_music_albums
+    when 4
+      list_all_genres
     when 5
       list_all_labels
-
     when 7
       add_a_book
+    when 8
+      add_a_music_album
     end
   end
 
@@ -78,7 +84,7 @@ class App
     menu
   end
 
-  # Add Music Album 
+  # Add Music Album
   def add_a_music_album
     puts "\nGenre\n"
     genre = gets.chomp
@@ -111,7 +117,7 @@ class App
     menu
   end
 
-  # List Genres 
+  # List Genres
   def list_all_genres
     if @genres.empty?
       puts "\nThere are no genre available"
