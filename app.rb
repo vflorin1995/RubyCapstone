@@ -47,7 +47,6 @@ class App
     date = gets.chomp
     book = Book.new(publisher, cover, date)
     @books.push(book)
-    p @books
     puts "\nWould you like to add a label?\n"
     option = gets.chomp.to_i
     if option == 1
@@ -58,7 +57,6 @@ class App
       label = Label.new(label_title, label_color)
       @labels.push(label)
     end
-    p @labels
     menu
   end
 
