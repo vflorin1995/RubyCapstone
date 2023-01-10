@@ -85,6 +85,7 @@ class App
       bookjson = bookfile.read
       JSON.parse(bookjson).map do |book|
         boke = Book.new(book['publisher'], book['cover_state'], book['publish_date'])
+        p boke
         @books.push(boke)
       end
       bookfile.close
