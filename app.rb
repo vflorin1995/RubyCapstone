@@ -95,15 +95,13 @@ class App
     publish_date = gets.chomp.to_s
     album = MusicAlbum.new(on_sportify, publish_date)
     @albums << album
-    puts "\nWould you like to add a label?\n"
+    puts "Would you want to add genre? (1): "
     option = gets.chomp.to_i
     if option == 1
-      puts "\nChoose a title for the label\n"
-      label_title = gets.chomp
-      puts "\nChoose a color for the label\n"
-      label_color = gets.chomp
-      label = Label.new(label_title, label_color)
-      @labels.push(label)
+      puts "Enter a genre for the album (e.g 'Comedy', 'Thriller'): "
+      name = gets.chomp
+      genre = Genre.new(name)
+      @genres << genre
     end
     puts "Music album added successfully"
     puts " "
@@ -130,6 +128,7 @@ class App
     else
       @genres.each { |genre| puts "Name: #{genre.name}" }
     end
+    puts ' '
     menu
   end
 end
