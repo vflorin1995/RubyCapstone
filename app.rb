@@ -100,4 +100,24 @@ class App
     end
     menu
   end
+
+  # List Music Album
+  def list_all_music_albums
+    if @albums.empty?
+      puts "\nThere are no music album available\n"
+    else
+      @albums.each { |album| puts "Genre: #{album.genre}, Author: #{album.author}" }
+    end
+    menu
+  end
+
+  # List Genres 
+  def list_all_genres
+    if @genres.empty?
+      puts "\nThere are no genre available"
+    else
+      @genres.each { |genre| puts "Name: #{genre.name}" }
+    end
+    menu
+  end
 end
