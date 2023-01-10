@@ -66,7 +66,7 @@ class App
   def save_all_labels_books
     bjson = []
     @books.each do |book|
-      bjson.push({ publisher: book.publisher, cover_state: book.cover_state, date: book.publish_date })
+      bjson.push({ publisher: book.publisher, cover_state: book.cover_state, publish_date: book.publish_date })
     end
     bookson = JSON.generate(bjson)
     File.write('books.json', bookson)
