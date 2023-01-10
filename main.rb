@@ -1,4 +1,4 @@
-require_relative 'app.rb'
+require_relative 'app'
 # Main Class
 class Main
   def start
@@ -9,7 +9,7 @@ class Main
     if action < 10 && action.positive?
       starting(action)
     elsif action == 10
-      puts "Bye!"
+      puts 'Bye!'
     else
       start
     end
@@ -19,13 +19,13 @@ class Main
     app = App.new
     case action
     when 1
-        app.list_all_books
+      app.list_all_books
 
     when 5
-        app.list_all_labels
+      app.list_all_labels
 
     when 7
-        app.add_a_book
+      app.add_a_book
 
     end
   end

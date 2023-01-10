@@ -39,5 +39,4 @@ class Item
   def add_source(source)
     @source = source
   end
-
 end
