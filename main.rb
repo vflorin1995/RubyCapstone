@@ -22,12 +22,18 @@ class Main
     case action
     when 1
       app.list_all_books
+    when 2
+      app.list_all_music_albums
+    when 4
+      app.list_all_genres
 
     when 5
       app.list_all_labels
 
     when 7
       app.add_a_book
+    when 8
+      app.add_a_music_album
 
     end
   end
