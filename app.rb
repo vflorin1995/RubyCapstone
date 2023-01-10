@@ -77,4 +77,27 @@ class App
     end
     menu
   end
+
+  # Add Music Album 
+  def add_a_music_album
+    puts "\nGenre\n"
+    genre = gets.chomp
+    puts "\nAuthor\n"
+    author = gets.chomp
+    puts "\nPublish date\n"
+    date = gets.chomp
+    album = MusicAlbum.new(genre, author, date)
+    @albums.push(album)
+    puts "\nWould you like to add a label?\n"
+    option = gets.chomp.to_i
+    if option == 1
+      puts "\nChoose a title for the label\n"
+      label_title = gets.chomp
+      puts "\nChoose a color for the label\n"
+      label_color = gets.chomp
+      label = Label.new(label_title, label_color)
+      @labels.push(label)
+    end
+    menu
+  end
 end
