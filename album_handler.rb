@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require_relative 'item'
 require_relative 'genre'
 
 # Music Albums and genre module
 module MusicAlbumHandler
-   
   # Add Music Album
-   def add_a_music_album
-    puts "Is the album on Spotify? [y/n]"
+  def add_a_music_album
+    puts 'Is the album on Spotify? [y/n]'
     input = gets.chomp.downcase
     on_sportify = input == 'y'
-    puts "Publish date:"
+    puts 'Publish date:'
     publish_date = gets.chomp.to_s
     album = MusicAlbum.new(on_sportify, publish_date)
     @albums << album
-    puts "Would you want to add genre? (1): "
+    save_music_album(album)
+    puts 'Would you want to add genre? (1): '
     option = gets.chomp.to_i
     if option == 1
       puts "Enter a genre for the album (e.g 'Comedy', 'Thriller'): "
@@ -21,8 +23,8 @@ module MusicAlbumHandler
       genre = Genre.new(name)
       @genres << genre
     end
-    puts "Music album added successfully"
-    puts " "
+    puts 'Music album added successfully'
+    puts ' '
     menu
   end
 
@@ -42,12 +44,25 @@ module MusicAlbumHandler
   def list_all_genres
     if @genres.empty?
       puts "\nThere are no genre available"
-         puts ''
+      puts ''
     else
       @genres.each { |genre| puts "Name: #{genre.name}" }
     end
     puts ' '
     menu
   end
-  
+
+  def save_music_album(_album)
+    if File.exist?('music_album')
+      data = JSON.parse(File.read('music_album'))
+      data << music_album.to_json
+      File.open('music_album', 'w') do |file|
+        file.puts data
+      end
+    else
+      File.open('music_album', 'w') do |file|
+        file.puts @albums
+      end
+    end
+  end
 end
