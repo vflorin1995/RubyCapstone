@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 require_relative 'item'
@@ -13,6 +15,6 @@ class MusicAlbum < Item
 
   # Check whether to be archived
   def can_be_archived?
-   @archived && @on_sportify == true
+    @archived && @on_sportify == true
   end
 end
