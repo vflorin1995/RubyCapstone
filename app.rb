@@ -16,7 +16,6 @@ class App
     list_books_stored
     list_labels_stored
   end
-
   def menu
     puts "\n\nWelcome to Catalog of my things \n 1 - List all books\n 2 - List all music albums\n 3 - List of games\n
  4 - List all genres\n 5 - List all labels\n 6 - List all authors\n 7 - Add a book\n 8 - Add a music album\n
@@ -30,12 +29,10 @@ class App
       menu
     end
   end
-
   def select(action)
     case action
     when 1
       list_all_books
-
     when 3
       list_of_games
     when 5
@@ -46,7 +43,6 @@ class App
       add_a_book
     end
   end
-
   def add_a_book
     puts "\nPublisher\n"
     publisher = gets.chomp
@@ -68,7 +64,6 @@ class App
     end
     save_all_labels_books
   end
-
   def save_all_labels_books
     bjson = []
     @books.each do |book|
@@ -84,7 +79,6 @@ class App
     File.write('labels.json', labson)
     menu
   end
-
   def list_books_stored
     if File.exist?('books.json') && !File.zero?('books.json')
       bookfile = File.open('books.json')
@@ -99,7 +93,6 @@ class App
       File.new('books.json', 'w')
     end
   end
-
   def list_all_books
     if @books.empty?
       puts "\nThere are no books available\n"
@@ -110,7 +103,6 @@ class App
     end
     menu
   end
-
   def list_of_games
     if @games.empty?
       puts "\nThere is no game available \n"
@@ -121,7 +113,6 @@ class App
     end
     menu
   end
-
   def list_all_labels
     if @labels.empty?
       puts "\nThere are no labels available"
@@ -130,7 +121,6 @@ class App
     end
     menu
   end
-
   def list_all_authors
     if @authors.empty?
       puts "\nThere are no authors available"
@@ -139,7 +129,6 @@ class App
     end
     menu
   end
-
   def add_a_game
     puts "\nMultiplayer\n"
     multiplayer = gets.chomp
@@ -161,7 +150,6 @@ class App
     end
     menu
   end
-
   def list_labels_stored
     if File.exist?('labels.json') && !File.zero?('labels.json')
       labelsfile = File.open('labels.json')
