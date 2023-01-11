@@ -34,25 +34,13 @@ module MusicAlbumHandler
 
   # List Music Album
   def list_all_music_albums
-    if @albums.empty?
-      puts "\nThere are no music album available\n"
-      puts ''
-    else
-      @albums.each { |album| puts "on Sportify?: #{album.on_sportify}, Publish date: #{album.publish_date}" }
-    end
-    puts ' '
+    load_music_albums
     menu
   end
 
   # List Genres
   def list_all_genres
-    if @genres.empty?
-      puts "\nThere are no genre available"
-      puts ''
-    else
-      @genres.each { |genre| puts "Name: #{genre.name}" }
-    end
-    puts ' '
+    load_genre
     menu
   end
 
@@ -88,5 +76,25 @@ module MusicAlbumHandler
       rescue => e
         puts 'error occurred'
       end
+  end
+
+  # Load from persisted MusicAlbum
+  def load_music_albums(file_name = 'music_album.json')
+    return puts "No available Music Albums" unless File.exist?(file_name)
+
+    file = File.read(file_name)
+    albums = JSON.parse(file)
+    albums.each { |album| puts "on Sportify?: #{album['on_sportify']}, Publish date: #{album['publish_date']}" }
+    return albums
+  end
+
+  # Load from persisted Genre
+  def load_genre(file_name = 'genre.json')
+    return puts "No availbale Genres" unless File.exist?(file_name)
+
+    file = File.read(file_name)
+    genres = JSON.parse(file)
+    genres.each  { |genre| puts "Name: #{genre['name']}" }
+    return genres
   end
 end
