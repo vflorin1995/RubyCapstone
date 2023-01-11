@@ -118,6 +118,21 @@ class App
     end
   end
 
+  def list_games_stored
+    if File.exist?('games.json') && !File.zero?('games.json')
+      gamefile = File.open('games.json')
+      gamesjson = gamefile.read
+      JSON.parse(gamesjson).map do |game|
+        gam = Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'])
+        p gam
+        @games.push(gam)
+      end
+      gamefile.close
+    else
+      File.new('games.json', 'w')
+    end
+  end
+
   def list_all_books
     if @books.empty?
       puts "\nThere are no books available\n"
