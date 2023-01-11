@@ -4,7 +4,7 @@ require_relative 'game'
 require_relative 'author'
 # App Class
 require 'json'
-# rubocop:disable ClassLength
+# rubocop:disable Metrics/ClassLength
 
 class App
   def initialize
@@ -177,4 +177,4 @@ class App
     end
   end
 end
-# rubocop:enable ClassLength
+# rubocop:enable Metrics/ClassLength
