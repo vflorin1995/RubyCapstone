@@ -1,5 +1,8 @@
 require_relative 'book'
 require_relative 'label'
+require_relative 'genre'
+require_relative 'music_album'
+require_relative 'album_handler'
 require_relative 'game'
 require_relative 'author'
 # App Class
@@ -7,6 +10,8 @@ require 'json'
 # rubocop:disable Metrics/ClassLength
 
 class App
+  include MusicAlbumHandler
+
   def initialize
     @books = []
     @albums = []
@@ -36,15 +41,29 @@ class App
     case action
     when 1
       list_all_books
-
+    when 2
+      list_all_music_albums
     when 3
       list_of_games
+    when 4
+      list_all_genres
+    else
+      select2(action)
+    end
+  end
+
+  def select2(action)
+    case action
     when 5
       list_all_labels
     when 6
       list_all_authors
     when 7
       add_a_book
+    when 8
+      add_a_music_album
+    when 9
+      add_a_game
     end
   end
 
@@ -92,7 +111,6 @@ class App
       bookjson = bookfile.read
       JSON.parse(bookjson).map do |book|
         boke = Book.new(book['publisher'], book['cover_state'], book['publish_date'])
-        p boke
         @books.push(boke)
       end
       bookfile.close
