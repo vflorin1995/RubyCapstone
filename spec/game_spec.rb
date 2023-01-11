@@ -12,5 +12,5 @@ describe Game do
     it 'Return correct last_played_at' do
       expect(game.last_played_at).to eq '2002/1/2'
     end
-  end  
+  end
 end
