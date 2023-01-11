@@ -1,6 +1,10 @@
 require_relative 'book'
 require_relative 'label'
+require_relative 'game'
+require_relative 'author'
+# App Class
 require 'json'
+# rubocop:disable Metrics/ClassLength
 
 class App
   def initialize
@@ -33,9 +37,12 @@ class App
     when 1
       list_all_books
 
+    when 3
+      list_of_games
     when 5
       list_all_labels
-
+    when 6
+      list_all_authors
     when 7
       add_a_book
     end
@@ -105,11 +112,53 @@ class App
     menu
   end
 
+  def list_of_games
+    if @games.empty?
+      puts "\nThere is no game available \n"
+    else
+      @games.each do |game|
+        puts "Multiplayer #{game.multiplayer}, last_played_at #{game.last_played_at}, publish_date #{game.publish_date}"
+      end
+    end
+    menu
+  end
+
   def list_all_labels
     if @labels.empty?
       puts "\nThere are no labels available"
     else
       @labels.each { |label| puts "\nLabel name #{label.title} of color #{label.color}\n" }
+    end
+    menu
+  end
+
+  def list_all_authors
+    if @authors.empty?
+      puts "\nThere are no authors available"
+    else
+      @authors.each { |author| puts "First Name #{author.first_name}, Last Name #{author.last_name}" }
+    end
+    menu
+  end
+
+  def add_a_game
+    puts "\nMultiplayer\n"
+    multiplayer = gets.chomp
+    puts "\nLast played at\n"
+    last_played_at = gets.chomp
+    puts "\nPublish date\n"
+    publish_date = gets.chomp
+    game = Game.new(multiplayer, last_played_at, publish_date)
+    @games.push(game)
+    puts "\nWould you like to add a game?[Y,N]\n"
+    option = gets.chomp
+    if option == 'y'
+      puts "\nEnter the First name of thr author\n"
+      first_name = gets.chomp
+      puts "\nEnter the Last name for the author\n"
+      last_name = gets.chomp
+      author = Author.new(first_name, last_name)
+      @authors.push(author)
     end
     menu
   end
@@ -128,3 +177,4 @@ class App
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
