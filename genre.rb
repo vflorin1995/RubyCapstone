@@ -17,7 +17,7 @@ class Genre
     @items << item
   end
 
-  #serializing Music Album
+  # serializing Music Album
   def to_json(option = {})
     { name: @name }.to_json(option)
   end

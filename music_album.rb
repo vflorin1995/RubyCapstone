@@ -18,7 +18,7 @@ class MusicAlbum < Item
     super && @on_sportify == true
   end
 
-  #serializing Music Album
+  # serializing Music Album
   def to_json(option = {})
     { on_sportify: @on_sportify, publish_date: @publish_date }.to_json(option)
   end

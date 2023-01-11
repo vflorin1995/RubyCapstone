@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'json'
 require_relative 'item'
 require_relative 'genre'
@@ -24,9 +25,7 @@ module MusicAlbumHandler
       @genres << genre
       save_genre(genre)
     end
-    if option == 'n'
-     puts "It's Ok!"
-    end
+    puts "It's Ok!" if option == 'n'
     puts 'Music album added successfully'
     puts ' '
     menu
@@ -56,9 +55,9 @@ module MusicAlbumHandler
       File.open(file_name, 'w') do |file|
         file.write(data.to_json)
       end
-      rescue => e
-        puts 'error occurred'
-      end
+    rescue StandardError => e
+      puts 'error occurred'
+    end
   end
 
   # Persist Genre data
@@ -73,28 +72,28 @@ module MusicAlbumHandler
       File.open(file_name, 'w') do |file|
         file.write(data.to_json)
       end
-      rescue => e
-        puts 'error occurred'
-      end
+    rescue StandardError => e
+      puts 'error occurred'
+    end
   end
 
   # Load from persisted MusicAlbum
   def load_music_albums(file_name = 'music_album.json')
-    return puts "No available Music Albums" unless File.exist?(file_name)
+    return puts 'No available Music Albums' unless File.exist?(file_name)
 
     file = File.read(file_name)
     albums = JSON.parse(file)
     albums.each { |album| puts "on Sportify?: #{album['on_sportify']}, Publish date: #{album['publish_date']}" }
-    return albums
+    albums
   end
 
   # Load from persisted Genre
   def load_genre(file_name = 'genre.json')
-    return puts "No availbale Genres" unless File.exist?(file_name)
+    return puts 'No availbale Genres' unless File.exist?(file_name)
 
     file = File.read(file_name)
     genres = JSON.parse(file)
-    genres.each  { |genre| puts "Name: #{genre['name']}" }
-    return genres
+    genres.each { |genre| puts "Name: #{genre['name']}" }
+    genres
   end
 end
