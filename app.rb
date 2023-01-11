@@ -32,9 +32,9 @@ class App
     case action
     when 1
       list_all_books
-    
+
     when 3
-      list_of_games  
+      list_of_games
     when 5
       list_all_labels
     when 6
@@ -74,13 +74,15 @@ class App
     end
     menu
   end
-  
+
   def list_of_games
     if @games.empty?
       puts "\nThere is no game available \n"
     else
-      @games.each { |game| puts "Multiplayer #{game.multiplayer}, last_played_at #{game.last_played_at}, publish_date #{game.publish_date}"}  
-    end 
+      @games.each do |game|
+        puts "Multiplayer #{game.multiplayer}, last_played_at #{game.last_played_at}, publish_date #{game.publish_date}"
+      end
+    end
     menu
   end
 
@@ -97,10 +99,11 @@ class App
     if @authors.empty?
       puts "\nThere are no authors available"
     else
-      @authors.each { |author| puts "First Name #{author.first_name}, Last Name #{author.last_name}"}
+      @authors.each { |author| puts "First Name #{author.first_name}, Last Name #{author.last_name}" }
     end
     menu
-  end   
+  end
+
   def add_a_game
     puts "\nMultiplayer\n"
     multiplayer = gets.chomp
@@ -120,10 +123,6 @@ class App
       author = Author.new(first_name, last_name)
       @authors.push(author)
     end
-    if option == 'N'
-      puts "okay! "
-    end
-    puts "Game added successfully"
     menu
-  end  
-end  
+  end
+end
