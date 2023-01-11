@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'json'
 require_relative 'item'
 require_relative 'genre'
 
@@ -7,7 +7,7 @@ require_relative 'genre'
 module MusicAlbumHandler
   # Add Music Album
   def add_a_music_album
-    puts 'Is the album on Spotify? [y/n]'
+    puts 'Is the album on Sportify? [y/n]'
     input = gets.chomp.downcase
     on_sportify = input == 'y'
     puts 'Publish date:'
@@ -15,13 +15,17 @@ module MusicAlbumHandler
     album = MusicAlbum.new(on_sportify, publish_date)
     @albums << album
     save_music_album(album)
-    puts 'Would you want to add genre? (1): '
-    option = gets.chomp.to_i
-    if option == 1
+    puts 'Would you want to add genre? [y/n]: '
+    option = gets.chomp.downcase
+    if option == 'y'
       puts "Enter a genre for the album (e.g 'Comedy', 'Thriller'): "
       name = gets.chomp
       genre = Genre.new(name)
       @genres << genre
+      save_genre(genre)
+    end
+    if option == 'n'
+     puts "It's Ok!"
     end
     puts 'Music album added successfully'
     puts ' '
@@ -52,17 +56,37 @@ module MusicAlbumHandler
     menu
   end
 
-  def save_music_album(_album)
-    if File.exist?('music_album')
-      data = JSON.parse(File.read('music_album'))
-      data << music_album.to_json
-      File.open('music_album', 'w') do |file|
-        file.puts data
-      end
-    else
-      File.open('music_album', 'w') do |file|
-        file.puts @albums
-      end
+  # Persist MusicAlbum data
+  def save_music_album(album, file_name = 'music_album.json')
+    data = []
+    if File.exist?(file_name)
+      file = File.read(file_name)
+      data = JSON.parse(file)
     end
+    data << album
+    begin
+      File.open(file_name, 'w') do |file|
+        file.write(data.to_json)
+      end
+      rescue => e
+        puts 'error occurred'
+      end
+  end
+
+  # Persist Genre data
+  def save_genre(genre, file_name = 'genre.json')
+    data = []
+    if File.exist?(file_name)
+      file = File.read(file_name)
+      data = JSON.parse(file)
+    end
+    data << genre
+    begin
+      File.open(file_name, 'w') do |file|
+        file.write(data.to_json)
+      end
+      rescue => e
+        puts 'error occurred'
+      end
   end
 end
