@@ -16,6 +16,8 @@ class App
     @authors = []
     list_books_stored
     list_labels_stored
+    list_games_stored
+    list_authors_stored
   end
 
   def menu
@@ -36,7 +38,6 @@ class App
     case action
     when 1
       list_all_books
-
     when 3
       list_of_games
     when 5
@@ -96,12 +97,11 @@ class App
     ajson = []
     @authors.each do |author|
       ajson.push({ first_name: author.first_name, last_name: author.last_name })
-
     end
     authson = JSON.generate(ajson)
     File.write('authors.json', authson)
     menu
-  end
+    end
 
   def list_books_stored
     if File.exist?('books.json') && !File.zero?('books.json')
