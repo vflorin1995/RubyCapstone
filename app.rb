@@ -208,5 +208,19 @@ class App
       File.new('labels.json', 'w')
     end
   end
+
+    def list_authors_stored
+    if File.exist?('authors.json') && !File.zero?('authors.json')
+      authorsfile = File.open('authors.json')
+      authorjson = authorsfile.read
+      JSON.parse(authorjson).map do |author|
+        autho = Author.new(author['first_name'], author['last_name'])
+        @authors.push(autho)
+      end
+      authorsfile.close
+    else
+      File.new('authors.json', 'w')
+    end
+  end
 end
 # rubocop:enable Metrics/ClassLength
