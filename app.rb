@@ -192,7 +192,8 @@ class App
       author = Author.new(first_name, last_name)
       @authors.push(author)
     end
-    menu
+      save_all_games_authors
+      menu
   end
 
   def list_labels_stored
