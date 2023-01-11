@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'json'
 require_relative 'item'
 require_relative 'genre'
@@ -27,7 +25,6 @@ module MusicAlbumHandler
     end
     puts "It's Ok!" if option == 'n'
     puts 'Music album added successfully'
-    puts ' '
     menu
   end
 
@@ -51,13 +48,7 @@ module MusicAlbumHandler
       data = JSON.parse(file)
     end
     data << album
-    begin
-      File.open(file_name, 'w') do |file|
-        file.write(data.to_json)
-      end
-    rescue StandardError => e
-      puts 'error occurred'
-    end
+    File.write(file_name, data.to_json)
   end
 
   # Persist Genre data
@@ -68,13 +59,7 @@ module MusicAlbumHandler
       data = JSON.parse(file)
     end
     data << genre
-    begin
-      File.open(file_name, 'w') do |file|
-        file.write(data.to_json)
-      end
-    rescue StandardError => e
-      puts 'error occurred'
-    end
+    File.write(file_name, data.to_json)
   end
 
   # Load from persisted MusicAlbum

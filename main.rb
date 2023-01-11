@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'app'
 # Main Class
 class Main
@@ -28,6 +26,13 @@ class Main
       app.list_of_games
     when 4
       app.list_all_genres
+    else
+      starting2(action)
+    end
+  end
+
+  def starting2(action)
+    case action
     when 5
       app.list_all_labels
     when 6

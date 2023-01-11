@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'book'
 require_relative 'label'
 require_relative 'genre'
@@ -49,6 +47,13 @@ class App
       list_of_games
     when 4
       list_all_genres
+    else
+      select2(action)
+    end
+  end
+
+  def select2(action)
+    case action
     when 5
       list_all_labels
     when 6
