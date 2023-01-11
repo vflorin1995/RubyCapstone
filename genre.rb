@@ -17,4 +17,9 @@ class Genre
     @items << item
     item.genre = self
   end
+
+  #serializing Music Album
+  def to_json(option = {})
+    { name: @name }.to_json(option)
+  end
 end
