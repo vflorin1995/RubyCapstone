@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require_relative 'book'
 require_relative 'label'
 require_relative 'game'
 require_relative 'author'
-# App Class
+
 require 'json'
 # rubocop:disable Metrics/ClassLength
-
+# App Class
 class App
   def initialize
     @books = []
@@ -87,10 +89,11 @@ class App
     menu
   end
 
-   def save_all_games_authors
+  def save_all_games_authors
     gjson = []
     @games.each do |game|
-      gjson.push({ multiplayer: game.multiplayer, last_played_at: game.last_played_at, publish_date: game.publish_date })
+      gjson.push({ multiplayer: game.multiplayer, last_played_at: game.last_played_at,
+                   publish_date: game.publish_date })
     end
     gameson = JSON.generate(gjson)
     File.write('games.json', gameson)
@@ -101,7 +104,7 @@ class App
     authson = JSON.generate(ajson)
     File.write('authors.json', authson)
     menu
-    end
+  end
 
   def list_books_stored
     if File.exist?('books.json') && !File.zero?('books.json')
@@ -192,8 +195,8 @@ class App
       author = Author.new(first_name, last_name)
       @authors.push(author)
     end
-      save_all_games_authors
-      menu
+    save_all_games_authors
+    menu
   end
 
   def list_labels_stored
@@ -210,7 +213,7 @@ class App
     end
   end
 
-    def list_authors_stored
+  def list_authors_stored
     if File.exist?('authors.json') && !File.zero?('authors.json')
       authorsfile = File.open('authors.json')
       authorjson = authorsfile.read
