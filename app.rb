@@ -5,10 +5,10 @@ require_relative 'music_album'
 require_relative 'album_handler'
 require_relative 'game'
 require_relative 'author'
-# App Class
+
 require 'json'
 # rubocop:disable Metrics/ClassLength
-
+# App Class
 class App
   include MusicAlbumHandler
 
@@ -21,6 +21,8 @@ class App
     @authors = []
     list_books_stored
     list_labels_stored
+    list_games_stored
+    list_authors_stored
   end
 
   def menu
@@ -105,6 +107,23 @@ class App
     menu
   end
 
+  def save_all_games_authors
+    gjson = []
+    @games.each do |game|
+      gjson.push({ multiplayer: game.multiplayer, last_played_at: game.last_played_at,
+                   publish_date: game.publish_date })
+    end
+    gameson = JSON.generate(gjson)
+    File.write('games.json', gameson)
+    ajson = []
+    @authors.each do |author|
+      ajson.push({ first_name: author.first_name, last_name: author.last_name })
+    end
+    authson = JSON.generate(ajson)
+    File.write('authors.json', authson)
+    menu
+  end
+
   def list_books_stored
     if File.exist?('books.json') && !File.zero?('books.json')
       bookfile = File.open('books.json')
@@ -116,6 +135,21 @@ class App
       bookfile.close
     else
       File.new('books.json', 'w')
+    end
+  end
+
+  def list_games_stored
+    if File.exist?('games.json') && !File.zero?('games.json')
+      gamefile = File.open('games.json')
+      gamesjson = gamefile.read
+      JSON.parse(gamesjson).map do |game|
+        gam = Game.new(game['multiplayer'], game['last_played_at'], game['publish_date'])
+        p gam
+        @games.push(gam)
+      end
+      gamefile.close
+    else
+      File.new('games.json', 'w')
     end
   end
 
@@ -178,6 +212,7 @@ class App
       author = Author.new(first_name, last_name)
       @authors.push(author)
     end
+    save_all_games_authors
     menu
   end
 
@@ -192,6 +227,20 @@ class App
       labelsfile.close
     else
       File.new('labels.json', 'w')
+    end
+  end
+
+  def list_authors_stored
+    if File.exist?('authors.json') && !File.zero?('authors.json')
+      authorsfile = File.open('authors.json')
+      authorjson = authorsfile.read
+      JSON.parse(authorjson).map do |author|
+        autho = Author.new(author['first_name'], author['last_name'])
+        @authors.push(autho)
+      end
+      authorsfile.close
+    else
+      File.new('authors.json', 'w')
     end
   end
 end
