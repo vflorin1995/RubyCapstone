@@ -8,7 +8,7 @@ describe Author do
       expect(author).to be_an_instance_of Author 
     end 
     it 'Should return array of items' do
-      expect(author.item.class).to eq Array
+      expect(author.items.class).to eq Array
     end 
     it 'Should return First Name' do
       expect(author.first_name).to eq 'Faranosh'
