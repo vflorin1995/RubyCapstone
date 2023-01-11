@@ -160,6 +160,8 @@ class App
       @authors.push(author)
     end
     menu
+  end
+
   def list_labels_stored
     if File.exist?('labels.json') && !File.zero?('labels.json')
       labelsfile = File.open('labels.json')
