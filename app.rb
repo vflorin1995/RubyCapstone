@@ -86,6 +86,23 @@ class App
     menu
   end
 
+   def save_all_games_authors
+    gjson = []
+    @games.each do |game|
+      gjson.push({ multiplayer: game.multiplayer, last_played_at: game.last_played_at, publish_date: game.publish_date })
+    end
+    gameson = JSON.generate(gjson)
+    File.write('games.json', gameson)
+    ajson = []
+    @authors.each do |author|
+      ajson.push({ first_name: author.first_name, last_name: author.last_name })
+
+    end
+    authson = JSON.generate(ajson)
+    File.write('authors.json', authson)
+    menu
+  end
+
   def list_books_stored
     if File.exist?('books.json') && !File.zero?('books.json')
       bookfile = File.open('books.json')
