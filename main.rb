@@ -22,14 +22,27 @@ class Main
     case action
     when 1
       app.list_all_books
+    when 2
+      app.list_all_music_albums
     when 3
       app.list_of_games
+    when 4
+      app.list_all_genres
+    else
+      starting2(action)
+    end
+  end
+
+  def starting2(action)
+    case action
     when 5
       app.list_all_labels
     when 6
       app.list_all_authors
     when 7
       app.add_a_book
+    when 8
+      app.add_a_music_album
     when 9
       app.add_a_game
     end
