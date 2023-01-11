@@ -15,6 +15,11 @@ class MusicAlbum < Item
 
   # Check whether to be archived
   def can_be_archived?
-    @archived && @on_sportify == true
+    super && @on_sportify == true
+  end
+
+  #serializing Music Album
+  def to_json(option = {})
+    { on_sportify: @on_sportify, publish_date: @publish_date }.to_json(option)
   end
 end
