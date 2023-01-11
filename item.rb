@@ -21,9 +21,9 @@ class Item
     label.add_item(label)
   end
 
-  def add_author(author)
+  def author=(author)
     @author = author
-    author.add_item(author)
+    author.items.push(self) unless author.items.include?(self)
   end
 
   def add_genre(genre)
