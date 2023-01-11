@@ -30,5 +30,8 @@ CREATE TABLE Game(
     last_played_at DATE,
     publish_date DATE,
     archived BOOLEAN,
-    CONSTRAINT FK_AUTHORID FOREIGN KEY(ID) REFERENCES Author(ID)
+    author_id INT REFERENCES Author(id),
+    label_id INT REFERENCES labels(id),
+    genre_id INT,
+    source_id INT
 )
