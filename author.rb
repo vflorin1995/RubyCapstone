@@ -10,8 +10,8 @@ class Author
     @items = []
   end
 
-  def add_items(given_item)
-    @items << given_item
-    given_item.author(self)
+  def add_items(item)
+    @items << item
+    item.author(self)
   end
 end
