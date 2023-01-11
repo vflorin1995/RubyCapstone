@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe MusicAlbum do
   before :each do
-    @music_album = MusicAlbum.new(true, '2012/1/2')
+    @music_album = MusicAlbum.new(true, '02/02/12')
   end
 
   describe '#initialize' do
