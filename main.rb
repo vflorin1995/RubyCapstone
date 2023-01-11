@@ -32,6 +32,7 @@ class Main
   end
 
   def starting2(action)
+    app = App.new
     case action
     when 5
       app.list_all_labels
