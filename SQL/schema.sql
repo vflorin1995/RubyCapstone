@@ -17,3 +17,21 @@ CREATE TABLE books
     genre_id INT,
     source_id INT
 );
+
+CREATE TABLE Author(
+    id INT CONSTRAINT ID_Author_PK PRIMARY KEY,
+    first_name VARCHAR(40),
+    last_name VARCHAR(40)
+);
+
+CREATE TABLE Game(
+    id INT CONSTRAINT ID_Games_PK PRIMARY KEY,
+    multiplayer VARCHAR(40),
+    last_played_at DATE,
+    publish_date DATE,
+    archived BOOLEAN,
+    author_id INT REFERENCES Author(id),
+    label_id INT REFERENCES labels(id),
+    genre_id INT,
+    source_id INT
+)
