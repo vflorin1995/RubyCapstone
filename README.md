@@ -40,6 +40,9 @@
 
 ## 🛠 Built With <a name="built-with"></a>
 
+> Ruby
+> postgresql
+
 ### Tech Stack <a name="tech-stack"></a>
 
 <details>
@@ -52,7 +55,9 @@
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
-
+> Add a Book
+> Add a Game
+> Add a Music Album
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -102,7 +107,7 @@ To run the project, execute the following command:
 
 To run tests, run the following command:
 
-- `npm run test`
+- `rspec spec`
 - This will run all tests on your local machine
 
 
