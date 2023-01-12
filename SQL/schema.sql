@@ -45,7 +45,6 @@ CREATE TABLE music_album
     publish_date DATE,
     archived BOOLEAN DEFAULT false,
     on_sportify BOOLEAN,
-    author_id INT,
     author_id INT REFERENCES Author(id),
     label_id INT REFERENCES labels(id),
     genre_id INT REFERENCES genre(id)
