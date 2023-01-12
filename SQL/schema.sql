@@ -2,14 +2,13 @@ CREATE TABLE labels
 (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title TEXT,
-    color TEXT,
+    color TEXT
 );
 
 CREATE TABLE genre
 (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(100)
-    FOREIGN KEY(item_id) REFERENCES item_id(id)
 );
 
 CREATE TABLE Author(
@@ -26,8 +25,8 @@ CREATE TABLE Game(
     archived BOOLEAN,
     author_id INT REFERENCES Author(id),
     label_id INT REFERENCES labels(id),
-    genre_id INT REFERENCES genre(id),
-)
+    genre_id INT REFERENCES genre(id)
+);
 
 CREATE TABLE books(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -35,10 +34,9 @@ CREATE TABLE books(
     archived BOOLEAN DEFAULT false,
     publisher TEXT,
     cover_state TEXT,
-    author_id INT,
     author_id INT REFERENCES Author(id),
     label_id INT REFERENCES labels(id),
-    genre_id INT REFERENCES genre(id),
+    genre_id INT REFERENCES genre(id)
 );
 
 CREATE TABLE music_album
@@ -50,5 +48,5 @@ CREATE TABLE music_album
     author_id INT,
     author_id INT REFERENCES Author(id),
     label_id INT REFERENCES labels(id),
-    genre_id INT REFERENCES genre(id),
+    genre_id INT REFERENCES genre(id)
 );
